@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // for mobile menu icons
+import { Menu, X } from "lucide-react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,9 +39,8 @@ const Header = () => {
           </Link>
           <Link to="/contact">
             <Button
-              variant="outline"
               size="sm"
-              className="rounded-full border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              className="rounded-full bg-yellow-500 text-white hover:bg-yellow-600 hover:text-white transition-all"
             >
               Contact Us
             </Button>
@@ -74,9 +73,8 @@ const Header = () => {
           </Link>
           <Link to="/contact" onClick={() => setIsOpen(false)}>
             <Button
-              variant="outline"
               size="sm"
-              className="w-full rounded-full border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              className="w-full rounded-full bg-yellow-500 text-white hover:bg-yellow-600 hover:text-white transition-all"
             >
               Contact Us
             </Button>
