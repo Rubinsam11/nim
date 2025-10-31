@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react"; // for mobile menu icons
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground shadow-md">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <div className="flex items-center">
             <svg className="w-8 h-8" viewBox="0 0 40 40" fill="currentColor">
@@ -18,6 +23,7 @@ const Header = () => {
           </div>
         </Link>
 
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           <Link to="/" className="hover:opacity-80 transition-opacity">
             Home
@@ -32,12 +38,51 @@ const Header = () => {
             Careers
           </Link>
           <Link to="/contact">
-            <Button variant="outline" size="sm" className="rounded-full border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-full border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            >
               Contact Us
             </Button>
           </Link>
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-primary-foreground"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-primary text-primary-foreground px-6 py-4 space-y-4">
+          <Link to="/" className="block hover:opacity-80" onClick={() => setIsOpen(false)}>
+            Home
+          </Link>
+          <Link to="/services" className="block hover:opacity-80" onClick={() => setIsOpen(false)}>
+            Services
+          </Link>
+          <Link to="/products" className="block hover:opacity-80" onClick={() => setIsOpen(false)}>
+            Products
+          </Link>
+          <Link to="/careers" className="block hover:opacity-80" onClick={() => setIsOpen(false)}>
+            Careers
+          </Link>
+          <Link to="/contact" onClick={() => setIsOpen(false)}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full rounded-full border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            >
+              Contact Us
+            </Button>
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
